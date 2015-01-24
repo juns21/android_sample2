@@ -1,16 +1,13 @@
 package com.example.c.t02_criminalintent;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends ActionBarActivity {
+public class CrimeListActivity extends SingleFragmentActivity {
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -24,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.fragmentContainer, fr)
                     .commit();
         }
-    }
+    }*/
 
 
     @Override
@@ -47,5 +44,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        return new CrimeListFragment();
     }
 }
