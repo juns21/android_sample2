@@ -39,7 +39,8 @@ public class CrimeListFragment extends ListFragment {
         //Log.d("CrimeListFragment", c.getTitle() + " was clicked");
         //Toast.makeText(getActivity(), c.getTitle() + " was clicked", Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent(getActivity(), CrimeActivity.class);
+        //Intent i = new Intent(getActivity(), CrimeActivity.class);
+        Intent i = new Intent(getActivity(), CrimePagerActivity.class);
         i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getId());
         startActivity(i);
     }
