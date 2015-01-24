@@ -13,11 +13,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.UUID;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CrimeFragment extends Fragment {
+    public static final String EXTRA_CRIME_ID = "com.example.c.t02_criminalintent.crime_id";
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
@@ -27,10 +30,24 @@ public class CrimeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static CrimeFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_CRIME_ID, crimeId);
+
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCrime = new Crime();
+        //UUID crimeId = (UUID) getActivity().getIntent().getExtras().get(EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
+        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
+        //Log.d("Title", mCrime.getTitle());
     }
 
     @Override
@@ -43,6 +60,7 @@ public class CrimeFragment extends Fragment {
         mDateButton.setText(mCrime.getDate().toString());
 
         mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mSolvedCheckbox.setChecked(mCrime.isSolved());
         mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -51,6 +69,7 @@ public class CrimeFragment extends Fragment {
         });
 
         mTitleField = (EditText) v.findViewById(R.id.crime_title);
+        mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -59,7 +78,8 @@ public class CrimeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTitle((String) s);
+                mCrime.setTitle(s.toString());
+
             }
 
             @Override
