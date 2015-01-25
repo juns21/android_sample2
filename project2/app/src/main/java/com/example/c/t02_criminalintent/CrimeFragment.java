@@ -64,6 +64,8 @@ public class CrimeFragment extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_crime, container, false);
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+
         mDateButton = (Button) v.findViewById(R.id.crime_date);
         mDateButton.setText(mCrime.getDate().toString());
         mDateButton.setOnClickListener(new View.OnClickListener() {

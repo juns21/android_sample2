@@ -1,8 +1,6 @@
 package com.example.c.t02_criminalintent;
 
 import android.support.v4.app.Fragment;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
 public class CrimeListActivity extends SingleFragmentActivity {
@@ -24,7 +22,7 @@ public class CrimeListActivity extends SingleFragmentActivity {
     }*/
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -44,7 +42,7 @@ public class CrimeListActivity extends SingleFragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     protected Fragment createFragment() {
