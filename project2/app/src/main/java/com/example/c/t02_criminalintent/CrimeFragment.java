@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,8 +113,12 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("date", "requestCode: "+ requestCode +", resultCode: "+ resultCode);
         if (requestCode == REQUEST_DATE) {
+            Log.d("date", "requestCode: "+ requestCode);
             if (requestCode == Activity.RESULT_OK) {
+                Log.d("date", "resultCode: "+ resultCode);
                 //Date date = (Date) data.getExtras().get(DatePickerFragment.EXTRA_DATE);
                 Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
                 mCrime.setDate(date);

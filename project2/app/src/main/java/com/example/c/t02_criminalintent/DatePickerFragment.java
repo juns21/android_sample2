@@ -53,7 +53,18 @@ public class DatePickerFragment extends DialogFragment {
                 getArguments().putSerializable(EXTRA_DATE, mDate);
             }
         });
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        return new AlertDialog.Builder(getActivity())
+                .setView(v)
+                .setTitle(R.string.date_picker_title)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendResult(Activity.RESULT_OK);
+                    }
+                })
+                .create();
+        /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(v);
         builder.setTitle(R.string.date_picker_title);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -64,7 +75,7 @@ public class DatePickerFragment extends DialogFragment {
         });
 
         AlertDialog dialog = builder.create();
-        return dialog;
+        return dialog;*/
     }
 
     private void sendResult(int resultCode) {
