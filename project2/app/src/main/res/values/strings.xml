@@ -16,4 +16,5 @@
     <string name="hide_subtitle">서브타이틀 감추기</string>
     <string name="subtitle">뭔가 보이면 얘기해주세요.</string>
     <string name="delete_crime">삭제</string>
+    <string name="take_picture">촬영</string>
 </resources>
