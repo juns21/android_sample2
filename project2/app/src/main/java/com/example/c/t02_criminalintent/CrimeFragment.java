@@ -3,6 +3,7 @@ package com.example.c.t02_criminalintent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +33,7 @@ public class CrimeFragment extends Fragment {
     public static final String DIALOG_DATE = "date";
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_PHOTO = 1;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -125,7 +127,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CrimeCameraActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_PHOTO);
             }
         });
 
@@ -146,7 +148,40 @@ public class CrimeFragment extends Fragment {
                 mCrime.setDate(date);
                 mDateButton.setText(date.toString());
             }
+        }else if (requestCode == REQUEST_PHOTO){
+            if (resultCode == Activity.RESULT_OK) {
+                String fileName = data.getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
+
+                Photo p = new Photo(fileName);
+                mCrime.setPhoto(p);
+
+                showPhoto();
+            }
         }
+    }
+
+    private void showPhoto() {
+        Photo p = mCrime.getPhoto();
+        BitmapDrawable b = null;
+
+        if (p != null) {
+            String path = getActivity().getFileStreamPath(p.getFilename()).getAbsolutePath();
+            b = PictureUtils.getScaledDrawable(getActivity(), path);
+        }
+
+        mPhotoButton.setImageDrawable(b);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        showPhoto();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        PictureUtils.cleanImageView(mPhotoButton);
     }
 
     @Override
